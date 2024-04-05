@@ -20,5 +20,6 @@ public class SP
     public const string uspExamById = "uspExamById";
 
     public const string uspExamRegister = "uspExamRegister";
+    public const string uspExamEdit = "uspExamEdit";
     #endregion
 }

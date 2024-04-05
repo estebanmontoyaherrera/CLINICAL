@@ -206,3 +206,31 @@ BEGIN
     WHERE ExamId = @ExamId;
 END
 GO
+
+CREATE PROCEDURE uspExamRemove
+(
+    @ExamId INT
+)
+AS
+BEGIN 
+    DELETE FROM Exams
+    WHERE ExamId  = @ExamId 
+END
+GO
+
+CREATE OR ALTER PROCEDURE uspExamChangeState
+(
+    @ExamId int,
+    @State int
+)
+AS
+BEGIN
+    UPDATE Exams
+    SET [State] = @State
+    WHERE ExamId = @ExamId
+END
+GO
+
+
+
+select * from Exams

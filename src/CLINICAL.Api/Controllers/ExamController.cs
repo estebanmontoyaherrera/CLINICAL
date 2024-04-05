@@ -1,4 +1,5 @@
 ﻿using CLINICAL.Application.UseCase.UseCases.Exam.Commands.CreateCommand;
+using CLINICAL.Application.UseCase.UseCases.Exam.Commands.UpdateCommand;
 using CLINICAL.Application.UseCase.UseCases.Exam.Queries.GetAllQuery;
 using CLINICAL.Application.UseCase.UseCases.Exam.Queries.GetByIdQuery;
 using MediatR;
@@ -31,8 +32,15 @@ namespace CLINICAL.Api.Controllers
             return Ok(response);
         }
 
-        [HttpPost("register")]
+        [HttpPost("Register")]
         public async Task<IActionResult> RegisterExam([FromBody] CreateExamCommand command)
+        {
+            var response = await _mediator.Send(command);
+            return Ok(response);
+        }
+
+        [HttpPut("Edit")]
+        public async Task<IActionResult> EditExam([FromBody] UpdateExamCommand command)
         {
             var response = await _mediator.Send(command);
             return Ok(response);
