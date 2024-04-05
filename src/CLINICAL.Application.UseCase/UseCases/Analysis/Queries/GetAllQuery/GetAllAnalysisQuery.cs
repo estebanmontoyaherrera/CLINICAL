@@ -1,4 +1,4 @@
-using CLINICAL.Application.Dtos.Response;
+using CLINICAL.Application.Dtos.Analysis.Response;
 using CLINICAL.Application.UseCase.Commons.Bases;
 using MediatR;
 

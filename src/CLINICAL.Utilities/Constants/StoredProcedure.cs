@@ -14,4 +14,8 @@ public class SP
 
 
     #endregion
+
+    #region uspExams
+    public const string uspExamList = "uspExamList";
+    #endregion
 }

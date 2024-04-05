@@ -1,5 +1,5 @@
 using AutoMapper;
-using CLINICAL.Application.Dtos.Response;
+using CLINICAL.Application.Dtos.Analysis.Response;
 using CLINICAL.Application.Interface.Interfaces;
 using CLINICAL.Application.UseCase.Commons.Bases;
 using CLINICAL.Utilities.Constants;

@@ -1,5 +1,5 @@
-CREATE DATABASE CLINICAL
-GO
+--CREATE DATABASE CLINICAL
+--GO
 
 USE CLINICAL
 GO
@@ -12,6 +12,19 @@ CREATE TABLE Analysis (
 )
 GO
 
+CREATE TABLE Exams 
+(
+ExamId int not null Identity(1,1)Primary Key,
+Name varchar(100),
+AnalysisId int not null,
+State int not null,
+AuditCreateDate datetime2(7) not null,
+Foreign Key(AnalysisId) References Analysis(AnalysisId)
+)
+GO
+
+
+-------Procedures--------
 CREATE PROCEDURE uspAnalysisList
 AS
 BEGIN
@@ -128,3 +141,24 @@ BEGIN
     WHERE AnalysisId = @AnalysisId
 END
 GO
+
+SELECT * FROM Analysis
+GO
+--------------Exams-------------
+
+CREATE OR ALTER PROCEDURE uspExamList
+AS
+BEGIN
+ SELECT
+ ex.ExamId,
+ ex.Name,
+ a.Name Analysis,
+ ex.AuditCreateDate,
+ CASE ex.State WHEN 1 THEN 'ACTIVO'
+ ELSE 'INACTIVO'
+ END StateExam
+ FROM Exams ex
+ INNER JOIN Analysis a
+ ON ex.AnalysisId=a.AnalysisId 
+
+END

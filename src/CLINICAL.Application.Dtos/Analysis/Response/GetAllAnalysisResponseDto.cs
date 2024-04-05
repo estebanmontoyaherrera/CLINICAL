@@ -1,4 +1,4 @@
-namespace CLINICAL.Application.Dtos.Response;
+namespace CLINICAL.Application.Dtos.Analysis.Response;
 
 public class GetAllAnalysisResponseDto
 {

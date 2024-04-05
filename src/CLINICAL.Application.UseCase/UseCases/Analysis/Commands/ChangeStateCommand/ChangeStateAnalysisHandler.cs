@@ -25,8 +25,7 @@ public class ChangeStateAnalysisHandler : IRequestHandler<ChangeStateAnalysisCom
         try
         {
             var analysis = _mapper.Map<Entity.Analysis>(request);
-            var parameters = analysis.GetPropertiesWithValues
-                ();
+            var parameters = analysis.GetPropertiesWithValues();
             response.Data = await _unitOfWork.Analysis.ExecAsync(SP.uspAnalysisChangeState, parameters);
 
             if (response.Data)

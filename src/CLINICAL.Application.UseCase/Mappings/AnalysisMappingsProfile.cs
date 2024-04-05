@@ -1,5 +1,5 @@
 using AutoMapper;
-using CLINICAL.Application.Dtos.Response;
+using CLINICAL.Application.Dtos.Analysis.Response;
 using CLINICAL.Application.UseCase.UseCases.Analysis.Commands.ChangeStateCommand;
 using CLINICAL.Application.UseCase.UseCases.Analysis.Commands.CreateCommand;
 using CLINICAL.Application.UseCase.UseCases.Analysis.Commands.UpdateCommand;
