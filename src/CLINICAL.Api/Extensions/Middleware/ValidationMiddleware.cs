@@ -1,6 +1,7 @@
 using System.Text.Json;
 using CLINICAL.Application.UseCase.Commons.Bases;
 using CLINICAL.Application.UseCase.Commons.Exceptions;
+using CLINICAL.Utilities.Constants;
 
 namespace CLINICAL.Api.Extensions.Middleware;
 
@@ -24,7 +25,7 @@ public class ValidationMiddleware
             context.Response.ContentType = "application/json";
             await JsonSerializer.SerializeAsync(context.Response.Body, new BaseResponse<object>
             {
-                Message = "Errores de validación",
+                Message =GlobalMessage.MESSAGE_VALIDATE,
                 Errors = e.Errors
             });
         }

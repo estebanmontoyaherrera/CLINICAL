@@ -27,13 +27,13 @@ public class AnalysisByIdHandler : IRequestHandler<GetAnalysisByIdQuery, BaseRes
             if (analysis is null)
             {
                 response.IsSuccess = false;
-                response.Message = "No se encontraron registros.";
+                response.Message =GlobalMessage.MESSAGE_QUERY_EMPTY;
                 return response;
             }
 
             response.IsSuccess = true;
             response.Data = _mapper.Map<GetAnalysisByIdResponseDto>(analysis);
-            response.Message = "Consulta Exitosa!!!";
+            response.Message = GlobalMessage.MESSAGE_QUERY;
         }
         catch (Exception e)
         {

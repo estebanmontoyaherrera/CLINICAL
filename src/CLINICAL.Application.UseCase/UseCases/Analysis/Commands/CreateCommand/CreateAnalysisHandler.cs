@@ -30,7 +30,7 @@ public class CreateAnalysisHandler : IRequestHandler<CreateAnalysisCommand, Base
             if (response.Data)
             {
                 response.IsSuccess = true;
-                response.Message = "Se registró correctamente";
+                response.Message = GlobalMessage.MESSAGE_SAVE;
             }
         }
         catch (Exception e)

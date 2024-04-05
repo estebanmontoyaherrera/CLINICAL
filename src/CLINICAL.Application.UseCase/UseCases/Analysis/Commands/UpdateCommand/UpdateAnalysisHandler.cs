@@ -30,7 +30,7 @@ public class UpdateAnalysisHandler : IRequestHandler<UpdateAnalysisCommand, Base
             if (response.Data)
             {
                 response.IsSuccess = true;
-                response.Message = "Actualización Exitosa!!";
+                response.Message = GlobalMessage.MESSAGE_UPDATE;
             }
         }   
         catch (Exception e)

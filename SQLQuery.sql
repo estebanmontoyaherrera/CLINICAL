@@ -149,16 +149,31 @@ GO
 CREATE OR ALTER PROCEDURE uspExamList
 AS
 BEGIN
- SELECT
+	 SELECT
+		 ex.ExamId,
+		 ex.Name,
+		 a.Name Analysis,
+		 ex.AuditCreateDate,
+		 CASE ex.State WHEN 1 THEN 'ACTIVO'
+		 ELSE 'INACTIVO'
+		 END StateExam
+	 FROM Exams ex
+		 INNER JOIN Analysis a
+		 ON ex.AnalysisId=a.AnalysisId 
+END
+GO
+
+CREATE OR ALTER PROCEDURE uspExamById 
+(
+@ExamId INT
+)
+AS
+BEGIN
+ SELECT 
  ex.ExamId,
  ex.Name,
- a.Name Analysis,
- ex.AuditCreateDate,
- CASE ex.State WHEN 1 THEN 'ACTIVO'
- ELSE 'INACTIVO'
- END StateExam
+ ex.AnalysisId
  FROM Exams ex
- INNER JOIN Analysis a
- ON ex.AnalysisId=a.AnalysisId 
-
+ WHERE ex.ExamId=@ExamId
 END
+GO

@@ -27,7 +27,7 @@ namespace CLINICAL.Application.UseCase.UseCases.Exam.Queries.GetAllQuery
                 {
                     response.IsSuccess = true;
                     response.Data= exams;
-                    response.Message = "Consulta Exitosa!!";
+                    response.Message = GlobalMessage.MESSAGE_QUERY;
                 }
             } 
             catch (Exception ex)

@@ -31,7 +31,7 @@ public class ChangeStateAnalysisHandler : IRequestHandler<ChangeStateAnalysisCom
             if (response.Data)
             {
                 response.IsSuccess = true;
-                response.Message = "Se actualizó el estado correctamente";
+                response.Message = GlobalMessage.MESSAGE_UPDATE_STATE;
             }
         }
         catch (Exception e)
