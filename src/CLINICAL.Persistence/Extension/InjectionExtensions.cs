@@ -10,8 +10,7 @@ public static class InjectionExtensions
     public static IServiceCollection AddInjectionPersistence(this IServiceCollection services)
     {
         services.AddSingleton<ApplicationDbContext>();
-
-        services.AddScoped<IExamRepository,ExamRepository>();
+        
 
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddTransient<IUnitOfWork, UnitOfWork>();

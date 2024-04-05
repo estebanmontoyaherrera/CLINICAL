@@ -1,4 +1,5 @@
-﻿using CLINICAL.Application.UseCase.UseCases.Exam.Queries.GetAllQuery;
+﻿using CLINICAL.Application.UseCase.UseCases.Exam.Commands.CreateCommand;
+using CLINICAL.Application.UseCase.UseCases.Exam.Queries.GetAllQuery;
 using CLINICAL.Application.UseCase.UseCases.Exam.Queries.GetByIdQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +28,13 @@ namespace CLINICAL.Api.Controllers
         public async Task<IActionResult> ExamById(int examId)
         {
             var response = await _mediator.Send(new GetExamByIdQuery() { ExamId = examId });
+            return Ok(response);
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> RegisterExam([FromBody] CreateExamCommand command)
+        {
+            var response = await _mediator.Send(command);
             return Ok(response);
         }
 

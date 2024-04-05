@@ -177,3 +177,32 @@ BEGIN
  WHERE ex.ExamId=@ExamId
 END
 GO
+
+CREATE OR ALTER PROCEDURE uspExamRegister
+(
+	@Name VARCHAR(100),
+	@AnalysisId INT 
+)
+AS
+BEGIN
+ INSERT INTO Exams (Name, AnalysisId, State, AuditCreateDate)
+ VALUES (@Name, @AnalysisId, 1, GETDATE())
+END
+GO
+
+
+
+CREATE OR ALTER PROCEDURE uspExamEdit
+    @ExamId INT,
+    @Name VARCHAR(100),
+    @AnalysisId INT
+    
+AS
+BEGIN
+    UPDATE Exams
+    SET Name = @Name,
+        AnalysisId = @AnalysisId
+       
+    WHERE ExamId = @ExamId;
+END
+GO

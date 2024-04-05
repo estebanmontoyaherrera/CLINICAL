@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CLINICAL.Application.Dtos.Exam.Response;
+using CLINICAL.Application.UseCase.UseCases.Exam.Commands.CreateCommand;
 using CLINICAL.Domain.Entities;
 
 namespace CLINICAL.Application.UseCase.Mappings
@@ -10,6 +11,8 @@ namespace CLINICAL.Application.UseCase.Mappings
         {
             CreateMap<Exam, GetExamByIdResponseDto>()
             .ReverseMap();
+
+            CreateMap<CreateExamCommand, Exam>();
         }
     }
 }
