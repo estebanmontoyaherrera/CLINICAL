@@ -1,4 +1,5 @@
 ﻿using CLINICAL.Application.UseCase.UseCases.Exam.Commands.CreateCommand;
+using CLINICAL.Application.UseCase.UseCases.Exam.Commands.RemoveCommand;
 using CLINICAL.Application.UseCase.UseCases.Exam.Commands.UpdateCommand;
 using CLINICAL.Application.UseCase.UseCases.Exam.Queries.GetAllQuery;
 using CLINICAL.Application.UseCase.UseCases.Exam.Queries.GetByIdQuery;
@@ -43,6 +44,13 @@ namespace CLINICAL.Api.Controllers
         public async Task<IActionResult> EditExam([FromBody] UpdateExamCommand command)
         {
             var response = await _mediator.Send(command);
+            return Ok(response);
+        }
+
+        [HttpDelete("Remove/{examId:int}")]
+        public async Task<IActionResult> RemoveExam(int examId)
+        {
+            var response = await _mediator.Send(new DeleteExamCommand() { ExamId = examId });
             return Ok(response);
         }
 
