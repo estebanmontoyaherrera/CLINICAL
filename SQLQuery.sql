@@ -23,7 +23,48 @@ Foreign Key(AnalysisId) References Analysis(AnalysisId)
 )
 GO
 
+CREATE TABLE DocumentTypes
+(
+DocumentTypeId int not null Identity(1,1)Primary key,
+Document varchar(50),
+State int,
+)
+GO
+CREATE TABLE TypesAges
+(
+TypeAgeId int not null Identity(1,1)Primary key,
+TypeAge varchar(50),
+State int ,
+)
+GO
 
+CREATE TABLE Genders
+(
+GenderId int not null Identity(1,1)Primary key,
+Gender varchar(50),
+State int ,
+)
+GO
+
+CREATE TABLE Patients
+(
+PatientId int not null Identity(1,1)Primary key,
+Names varchar(100),
+LastName varchar(50),
+MotherMaidenName varchar(50),
+DocumentTypeId int,
+DocumentNumber varchar(25),
+Phone varchar(15),
+TypeAgeId int,
+Age int,
+GenderId int,
+State int ,
+AuditCreateDate datetime2(7),
+Foreign Key(DocumentTypeId) References DocumentTypes(DocumentTypeId),
+Foreign Key(TypeAgeId) References TypesAges(TypeAgeId),
+Foreign Key(GenderId) References Genders(GenderId)
+)
+GO
 -------Procedures--------
 CREATE PROCEDURE uspAnalysisList
 AS
@@ -207,7 +248,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE uspExamRemove
+CREATE OR ALTER PROCEDUREE uspExamRemove
 (
     @ExamId INT
 )
@@ -233,4 +274,29 @@ GO
 
 
 
-select * from Exams
+CREATE OR ALTER PROCEDURE upsPatientList
+AS
+BEGIN
+SELECT 
+    P.PatientId,
+    P.Names,
+CONCAT_WS(' ',P.LastName,P.MotherMaidenName)SurNames,
+D.Document DocumentType,
+p.DocumentNumber,
+P.Phone,
+CONCAT_WS(' ',P.Age,T.TypeAge)Age,
+G.Gender,
+CASE P.State WHEN 1 THEN 'ACTIVO'
+		 ELSE 'INACTIVO'
+		 END StatePatient,
+P.AuditCreateDate
+FROM 
+    Patients P
+INNER JOIN 
+    DocumentTypes D ON P.DocumentTypeId = D.DocumentTypeId
+INNER JOIN 
+    TypesAges T ON P.TypeAgeId = T.TypeAgeId
+INNER JOIN 
+    Genders G ON P.GenderId = G.GenderId
+END
+GO
