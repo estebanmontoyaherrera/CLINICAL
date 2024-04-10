@@ -12,7 +12,7 @@ public static class GetEntityProperties
         foreach (PropertyInfo property in properties)
         {
             object value = property.GetValue(entity)!;
-            if (value is not null)
+            if (value != null)
             {
                 entityParams[property.Name] = value;
             }

@@ -327,5 +327,58 @@ WHERE PatientId=@PatientId
 END
 GO
 
-SELECT * FROM Patients
 
+
+CREATE OR ALTER PROCEDURE uspPatientRegister
+    @Names varchar(100),
+    @LastName varchar(50),
+    @MotherMaidenName varchar(50),
+    @DocumentTypeId int,
+    @DocumentNumber varchar(25),
+    @Phone varchar(15),
+    @TypeAgeId int,
+    @Age int,
+    @GenderId int	
+
+AS
+BEGIN
+   
+    INSERT INTO Patients (Names, LastName, MotherMaidenName, DocumentTypeId, DocumentNumber, Phone, TypeAgeId, Age, GenderId, State, AuditCreateDate)
+    VALUES (@Names, @LastName, @MotherMaidenName, @DocumentTypeId, @DocumentNumber, @Phone, @TypeAgeId, @Age, @GenderId, 1, GETDATE());
+END
+GO
+
+
+CREATE PROCEDURE UpdatePatient
+    @PatientId int,
+    @Names varchar(100),
+    @LastName varchar(50),
+    @MotherMaidenName varchar(50),
+    @DocumentTypeId int,
+    @DocumentNumber varchar(25),
+    @Phone varchar(15),
+    @TypeAgeId int,
+    @Age int,
+    @GenderId int,
+    @State int
+AS
+BEGIN
+   
+
+    UPDATE Patients
+    SET Names = @Names,
+        LastName = @LastName,
+        MotherMaidenName = @MotherMaidenName,
+        DocumentTypeId = @DocumentTypeId,
+        DocumentNumber = @DocumentNumber,
+        Phone = @Phone,
+        TypeAgeId = @TypeAgeId,
+        Age = @Age,
+        GenderId = @GenderId,
+        State = @State
+    WHERE PatientId = @PatientId;
+END
+GO
+
+
+SELECT * FROM Patients

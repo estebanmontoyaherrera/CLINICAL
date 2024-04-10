@@ -29,5 +29,8 @@ public class SP
     public const string upsPatientList = "upsPatientList";
     public const string upsPatientById = "upsPatientById";
 
+    public const string uspPatientRegister = "uspPatientRegister";
+    public const string uspPatientEdit = "uspPatientEdit";
+
     #endregion
 }

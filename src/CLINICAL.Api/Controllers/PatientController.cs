@@ -1,4 +1,6 @@
-﻿using CLINICAL.Application.UseCase.UseCases.Exam.Queries.GetByIdQuery;
+﻿using CLINICAL.Application.UseCase.UseCases.Exam.Commands.CreateCommand;
+using CLINICAL.Application.UseCase.UseCases.Exam.Queries.GetByIdQuery;
+using CLINICAL.Application.UseCase.UseCases.Patient.Commands.CreateCommand;
 using CLINICAL.Application.UseCase.UseCases.Patient.Queries.GetAllQuery;
 using CLINICAL.Application.UseCase.UseCases.Patient.Queries.GetByIdQuery;
 using CLINICAL.Domain.Entities;
@@ -26,9 +28,16 @@ namespace CLINICAL.Api.Controllers
         }
 
         [HttpGet("{patientId:int}")]
-        public async Task<IActionResult> ExamById(int patientId)
+        public async Task<IActionResult> PatientById(int patientId)
         {
             var response = await _mediator.Send(new GetPatientByIdQuery() { PatientId = patientId });
+            return Ok(response);
+        }
+
+        [HttpPost("Register")]
+        public async Task<IActionResult> RegisterPatient([FromBody] CreatePatientCommand command)
+        {
+            var response = await _mediator.Send(command);
             return Ok(response);
         }
     }
