@@ -248,7 +248,7 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDUREE uspExamRemove
+CREATE OR ALTER PROCEDURE uspExamRemove
 (
     @ExamId INT
 )
@@ -300,3 +300,38 @@ INNER JOIN
     Genders G ON P.GenderId = G.GenderId
 END
 GO
+
+
+
+CREATE OR ALTER PROCEDURE upsPatientById
+(
+@PatientId INT
+)
+AS
+BEGIN
+SELECT 
+    P.PatientId,
+    P.Names,
+	P.LastName,
+	P.MotherMaidenName,
+	P.DocumentTypeId,
+	P.DocumentNumber,
+	P.Phone,
+	P.TypeAgeId,
+	P.Age,
+	P.GenderId
+
+FROM 
+    Patients P
+WHERE PatientId=@PatientId
+END
+GO
+
+SELECT * FROM Patients
+--CREATE PROCEDURE uspDocumentTypeList
+--AS
+--BEGIN    
+--    SELECT DocumentTypeId, Document, State
+--    FROM DocumentTypes;
+--END
+--GO
