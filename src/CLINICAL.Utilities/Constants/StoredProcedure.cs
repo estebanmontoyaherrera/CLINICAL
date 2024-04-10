@@ -25,8 +25,9 @@ public class SP
     public const string uspExamChangeState = "uspExamChangeState";
     #endregion
 
-    #region uspExams
+    #region uspPatient
     public const string upsPatientList = "upsPatientList";
+    public const string upsPatientById = "upsPatientById";
 
     #endregion
 }

@@ -303,7 +303,7 @@ GO
 
 
 
-CREATE OR ALTER PROCEDURE upsPatientById
+CREATE OR ALTER PROCEDURE upsPatientById 
 (
 @PatientId INT
 )
@@ -328,10 +328,4 @@ END
 GO
 
 SELECT * FROM Patients
---CREATE PROCEDURE uspDocumentTypeList
---AS
---BEGIN    
---    SELECT DocumentTypeId, Document, State
---    FROM DocumentTypes;
---END
---GO
+
