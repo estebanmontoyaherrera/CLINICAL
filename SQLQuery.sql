@@ -408,7 +408,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE uspPatientRemove
+CREATE OR ALTER PROCEDURE uspPatientRemove
     @PatientId int
 AS
 BEGIN
@@ -524,5 +524,24 @@ BEGIN
 END
 GO
 
+CREATE OR ALTER PROCEDURE uspMedicRemove
+    @MedicId int
+AS
+BEGIN
+    DELETE FROM Medics
+    WHERE MedicId = @MedicId;
+END
+GO
+
+CREATE OR ALTER PROCEDURE uspMedicChangeState
+    @MedicId int,
+    @State int
+AS
+BEGIN 
+    UPDATE Medics
+    SET State = @State
+    WHERE MedicId = @MedicId;
+END
+GO
 
 SELECT * FROM Medics

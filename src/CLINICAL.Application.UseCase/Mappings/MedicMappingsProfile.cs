@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CLINICAL.Application.Dtos.Medic.Response;
+using CLINICAL.Application.UseCase.UseCases.Medic.Commands.ChangeStateCommand;
 using CLINICAL.Application.UseCase.UseCases.Medic.Commands.CreateCommand;
 using CLINICAL.Application.UseCase.UseCases.Medic.Commands.UpdateCommand;
 using CLINICAL.Domain.Entities;
@@ -15,7 +16,7 @@ namespace CLINICAL.Application.UseCase.Mappings
 
             CreateMap<CreateMedicCommand, Medic>();
             CreateMap<UpdateMedicCommand, Medic>();
-            //CreateMap<ChangeStatePatientCommand, Patient>();
+            CreateMap<ChangeStateMedicCommand, Medic>();
         }
     }
 }
