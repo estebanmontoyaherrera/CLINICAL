@@ -389,4 +389,17 @@ BEGIN
 END
 GO
 
+CREATE OR ALTER PROCEDURE uspPatientChangeState
+    @PatientId int,
+    @State int
+AS
+BEGIN 
+
+    UPDATE Patients
+    SET State = @State
+    WHERE PatientId = @PatientId;
+END
+GO
+
+
 SELECT * FROM Patients

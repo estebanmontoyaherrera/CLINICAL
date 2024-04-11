@@ -1,9 +1,9 @@
-﻿using CLINICAL.Application.UseCase.UseCases.Patient.Commands.CreateCommand;
+﻿using CLINICAL.Application.UseCase.UseCases.Patient.Commands.ChangeStateCommand;
+using CLINICAL.Application.UseCase.UseCases.Patient.Commands.CreateCommand;
 using CLINICAL.Application.UseCase.UseCases.Patient.Commands.DeleteCommand;
 using CLINICAL.Application.UseCase.UseCases.Patient.Commands.UpdateCommand;
 using CLINICAL.Application.UseCase.UseCases.Patient.Queries.GetAllQuery;
 using CLINICAL.Application.UseCase.UseCases.Patient.Queries.GetByIdQuery;
-using CLINICAL.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -52,6 +52,13 @@ namespace CLINICAL.Api.Controllers
         public async Task<IActionResult> RemoveExam(int patientId)
         {
             var response = await _mediator.Send(new DeletePatientCommand() { PatientId = patientId });
+            return Ok(response);
+        }
+
+        [HttpPut("ChangeState")]
+        public async Task<IActionResult> ChangeStatePatient([FromBody] ChangeStatePatientCommand command)
+        {
+            var response = await _mediator.Send(command);
             return Ok(response);
         }
     }
