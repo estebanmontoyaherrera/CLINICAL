@@ -13,12 +13,15 @@ public class UnitOfWork : IUnitOfWork
 
     public IPatientRepository Patient { get; }
 
+    public IMedicRepository Medic { get; }
+
     public UnitOfWork(ApplicationDbContext context, IGenericRepository<Analysis> analysis)
     {
         _context = context;
         Analysis = analysis;
         Exam = new ExamRepository(_context);
         Patient = new PatientRepository(_context);
+        Medic = new MedicRepository(_context);
     }
 
     public void Dispose()

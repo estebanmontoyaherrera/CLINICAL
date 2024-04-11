@@ -34,4 +34,10 @@ public class SP
     public const string uspPatientRemove = "uspPatientRemove";
     public const string uspPatientChangeState = "uspPatientChangeState";
     #endregion
+
+    #region upsMedics
+    public const string upsMedicList = "upsMedicList";
+    public const string upsMedicById = "upsMedicById";
+
+    #endregion
 }

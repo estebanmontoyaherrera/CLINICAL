@@ -65,6 +65,34 @@ Foreign Key(TypeAgeId) References TypesAges(TypeAgeId),
 Foreign Key(GenderId) References Genders(GenderId)
 )
 GO
+
+CREATE TABLE Specialties
+(
+SpecialtyId int not null Identity(1,1)Primary key,
+Name varchar(100),
+State int,
+AuditCreateDate datetime2(7)
+)
+GO
+CREATE TABLE Medics
+(
+MedicId int not null Identity(1,1)Primary key,
+Names varchar(100),
+LastName varchar(50),
+MotherMaidenName varchar(50),
+Address varchar(255),
+Phone varchar(20),
+BirthDate date,
+DocumentTypeId int,
+DocumentNumber varchar(25),
+SpecialtyId int not null,
+State int ,
+AuditCreateDate datetime2(7),
+Foreign Key(DocumentTypeId) References DocumentTypes(DocumentTypeId),
+Foreign Key(SpecialtyId) References Specialties(SpecialtyId)
+)
+GO
+
 -------Procedures--------
 CREATE PROCEDURE uspAnalysisList
 AS
@@ -272,7 +300,7 @@ BEGIN
 END
 GO
 
-
+----------Patients-----------
 
 CREATE OR ALTER PROCEDURE upsPatientList
 AS
@@ -349,7 +377,7 @@ END
 GO
 
 
-CREATE PROCEDURE uspPatientEdit
+CREATE OR ALTER PROCEDURE uspPatientEdit
     @PatientId int,
     @Names varchar(100),
     @LastName varchar(50),
@@ -400,6 +428,71 @@ BEGIN
     WHERE PatientId = @PatientId;
 END
 GO
+--------------Medics-----------
+CREATE OR ALTER PROCEDURE upsMedicList
+AS
+BEGIN
+    
+    SELECT  
+	M.MedicId,
+	M.Names,
+	CONCAT_WS(' ',M.LastName,M.MotherMaidenName)SurNames,
+	S.Name Specialty,
+	D.Document DocumentType,
+	M.DocumentNumber,
+	M.Address,
+	M.Phone,
+	M.BirthDate,
+	CASE M.State WHEN 1 THEN 'ACTIVO'
+		 ELSE 'INACTIVO'
+		 END StateMedic,
+    M.AuditCreateDate
+    FROM Medics M
+    INNER JOIN DocumentTypes D ON M.DocumentTypeId = D.DocumentTypeId
+    INNER JOIN Specialties S ON M.SpecialtyId = S.SpecialtyId;
+END
+GO
 
+CREATE OR ALTER PROCEDURE upsMedicById 
+(
+@MedicId INT
+)
+AS
+BEGIN
+SELECT 
+    MedicId,
+    Names,
+	LastName,
+	MotherMaidenName,
+	Address,
+	Phone,
+	BirthDate,
+	DocumentTypeId,
+	DocumentNumber,
+	SpecialtyId
+FROM 
+    Medics 
+WHERE MedicId=@MedicId
+END
+GO
 
-SELECT * FROM Patients
+CREATE PROCEDURE uspMedicRegister
+    @Names varchar(100),
+    @LastName varchar(50),
+    @MotherMaidenName varchar(50),
+    @Address varchar(255),
+    @Phone varchar(20),
+    @BirthDate date,
+    @DocumentTypeId int,
+    @DocumentNumber varchar(25),
+    @SpecialtyId int
+
+AS
+BEGIN
+
+    INSERT INTO Medics (Names, LastName, MotherMaidenName, Address, Phone, BirthDate, DocumentTypeId, DocumentNumber, SpecialtyId, State, AuditCreateDate)
+    VALUES (@Names, @LastName, @MotherMaidenName, @Address, @Phone, @BirthDate, @DocumentTypeId, @DocumentNumber, @SpecialtyId, 1, GETDATE());
+END
+GO
+
+SELECT * FROM Medics

@@ -20,4 +20,8 @@
       <PackageReference Include="MediatR" Version="12.1.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="UseCases\Medic\Commands\" />
+    </ItemGroup>
+
 </Project>

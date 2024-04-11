@@ -9,4 +9,6 @@ public interface IUnitOfWork : IDisposable
 
     IPatientRepository Patient { get; }
 
+    IMedicRepository Medic { get; }
+
 }
