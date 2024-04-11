@@ -495,4 +495,34 @@ BEGIN
 END
 GO
 
+CREATE OR ALTER PROCEDURE uspMedicEdit
+    @MedicId int,
+    @Names varchar(100),
+    @LastName varchar(50),
+    @MotherMaidenName varchar(50),
+    @Address varchar(255),
+    @Phone varchar(20),
+    @BirthDate varchar(10),
+    @DocumentTypeId int,
+    @DocumentNumber varchar(25),
+    @SpecialtyId int
+   
+AS
+BEGIN
+    UPDATE Medics
+    SET Names = @Names,
+        LastName = @LastName,
+        MotherMaidenName = @MotherMaidenName,
+        Address = @Address,
+        Phone = @Phone,
+        BirthDate =CONVERT(DATE, @BirthDate),
+        DocumentTypeId = @DocumentTypeId,
+        DocumentNumber = @DocumentNumber,
+        SpecialtyId = @SpecialtyId       
+       
+    WHERE MedicId = @MedicId;
+END
+GO
+
+
 SELECT * FROM Medics

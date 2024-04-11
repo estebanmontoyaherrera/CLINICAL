@@ -10,4 +10,9 @@
       <ProjectReference Include="..\CLINICAL.Application.Dtos\CLINICAL.Application.Dtos.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Extensions\" />
+      <Folder Include="Services\" />
+    </ItemGroup>
+
 </Project>
