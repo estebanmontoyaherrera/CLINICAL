@@ -349,7 +349,7 @@ END
 GO
 
 
-CREATE PROCEDURE UpdatePatient
+CREATE PROCEDURE uspPatientEdit
     @PatientId int,
     @Names varchar(100),
     @LastName varchar(50),
@@ -380,5 +380,13 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE uspPatientRemove
+    @PatientId int
+AS
+BEGIN
+    DELETE FROM Patients
+    WHERE PatientId = @PatientId;
+END
+GO
 
 SELECT * FROM Patients

@@ -1,6 +1,6 @@
-﻿using CLINICAL.Application.UseCase.UseCases.Exam.Commands.CreateCommand;
-using CLINICAL.Application.UseCase.UseCases.Exam.Queries.GetByIdQuery;
-using CLINICAL.Application.UseCase.UseCases.Patient.Commands.CreateCommand;
+﻿using CLINICAL.Application.UseCase.UseCases.Patient.Commands.CreateCommand;
+using CLINICAL.Application.UseCase.UseCases.Patient.Commands.DeleteCommand;
+using CLINICAL.Application.UseCase.UseCases.Patient.Commands.UpdateCommand;
 using CLINICAL.Application.UseCase.UseCases.Patient.Queries.GetAllQuery;
 using CLINICAL.Application.UseCase.UseCases.Patient.Queries.GetByIdQuery;
 using CLINICAL.Domain.Entities;
@@ -38,6 +38,20 @@ namespace CLINICAL.Api.Controllers
         public async Task<IActionResult> RegisterPatient([FromBody] CreatePatientCommand command)
         {
             var response = await _mediator.Send(command);
+            return Ok(response);
+        }
+
+        [HttpPut("Edit")]
+        public async Task<IActionResult> EditPatient([FromBody] UpdatePatientCommand command)
+        {
+            var response = await _mediator.Send(command);
+            return Ok(response);
+        }
+
+        [HttpDelete("Remove/{patientId:int}")]
+        public async Task<IActionResult> RemoveExam(int patientId)
+        {
+            var response = await _mediator.Send(new DeletePatientCommand() { PatientId = patientId });
             return Ok(response);
         }
     }

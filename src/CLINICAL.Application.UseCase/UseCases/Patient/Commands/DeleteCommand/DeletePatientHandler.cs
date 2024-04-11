@@ -1,18 +1,24 @@
 ﻿using CLINICAL.Application.Interface.Interfaces;
 using CLINICAL.Application.UseCase.Commons.Bases;
+using CLINICAL.Application.UseCase.UseCases.Exam.Commands.RemoveCommand;
 using CLINICAL.Utilities.Constants;
 using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace CLINICAL.Application.UseCase.UseCases.Exam.Commands.RemoveCommand
+namespace CLINICAL.Application.UseCase.UseCases.Patient.Commands.DeleteCommand
 {
-    public class DeleteExamHandler : IRequestHandler<DeleteExamCommand, BaseResponse<bool>>
+    public class DeletePatientHandler : IRequestHandler<DeletePatientCommand, BaseResponse<bool>>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public DeleteExamHandler( IUnitOfWork unitOfWork)
+        public DeletePatientHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task<BaseResponse<bool>> Handle(DeleteExamCommand request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<bool>> Handle(DeletePatientCommand request, CancellationToken cancellationToken)
         {
             var response = new BaseResponse<bool>();
             try

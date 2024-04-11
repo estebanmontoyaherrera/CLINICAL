@@ -31,6 +31,7 @@ public class SP
 
     public const string uspPatientRegister = "uspPatientRegister";
     public const string uspPatientEdit = "uspPatientEdit";
+    public const string uspPatientRemove = "uspPatientRemove";
 
     #endregion
 }
