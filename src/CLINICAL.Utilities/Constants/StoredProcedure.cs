@@ -39,5 +39,7 @@ public class SP
     public const string upsMedicList = "upsMedicList";
     public const string upsMedicById = "upsMedicById";
 
+    public const string uspMedicRegister = "uspMedicRegister";
+
     #endregion
 }

@@ -476,7 +476,7 @@ WHERE MedicId=@MedicId
 END
 GO
 
-CREATE PROCEDURE uspMedicRegister
+CREATE OR ALTER PROCEDURE uspMedicRegister
     @Names varchar(100),
     @LastName varchar(50),
     @MotherMaidenName varchar(50),
@@ -491,7 +491,7 @@ AS
 BEGIN
 
     INSERT INTO Medics (Names, LastName, MotherMaidenName, Address, Phone, BirthDate, DocumentTypeId, DocumentNumber, SpecialtyId, State, AuditCreateDate)
-    VALUES (@Names, @LastName, @MotherMaidenName, @Address, @Phone, @BirthDate, @DocumentTypeId, @DocumentNumber, @SpecialtyId, 1, GETDATE());
+    VALUES (@Names, @LastName, @MotherMaidenName, @Address, @Phone,CONVERT(DATE,@BirthDate), @DocumentTypeId, @DocumentNumber, @SpecialtyId, 1, GETDATE());
 END
 GO
 
