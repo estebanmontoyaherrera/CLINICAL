@@ -1,6 +1,4 @@
-﻿
-
-using CLINICAL.Application.Dtos.Exam.Response;
+﻿using CLINICAL.Application.Dtos.Exam.Response;
 using CLINICAL.Application.Interface.Interfaces;
 using CLINICAL.Application.UseCase.Commons.Bases;
 using CLINICAL.Utilities.Constants;
@@ -22,7 +20,7 @@ namespace CLINICAL.Application.UseCase.UseCases.Exam.Queries.GetAllQuery
             var response = new BasePaginationResponse<IEnumerable<GetAllExamResponseDto>>();
             
             try {
-                var count = await _unitOfWork.Analysis.CountAsync(TB.Exams);
+                var count = await _unitOfWork.Exam.CountAsync(TB.Exams);
                 var exams = await _unitOfWork.Exam.GetAllExams(SP.uspExamList,request);
 
                 if (exams is not null)

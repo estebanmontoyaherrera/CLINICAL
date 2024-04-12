@@ -317,7 +317,7 @@ GO
 
 ----------Patients-----------
 
-CREATE OR ALTER PROCEDURE upsPatientList
+CREATE OR ALTER PROCEDURE upsPatientList 
 (
 @PageNumber INT,
 @PageSize INT

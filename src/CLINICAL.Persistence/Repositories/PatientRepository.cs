@@ -4,6 +4,7 @@ using CLINICAL.Domain.Entities;
 using CLINICAL.Persistence.Context;
 using Dapper;
 using System.Data;
+using System.Reflection.Metadata;
 
 namespace CLINICAL.Persistence.Repositories
 {
@@ -14,10 +15,11 @@ namespace CLINICAL.Persistence.Repositories
         {
             _context = context;
         }
-        public async Task<IEnumerable<GetAllPatientResponseDto>> GetAllPatients(string storedProcedure)
+        public async Task<IEnumerable<GetAllPatientResponseDto>> GetAllPatients(string storedProcedure, object parameter)
         {
             using var connection = _context.CreateConnection;
-            var patients = await connection.QueryAsync<GetAllPatientResponseDto>(storedProcedure, commandType: CommandType.StoredProcedure);
+            var objectParam = new DynamicParameters(parameter);
+            var patients = await connection.QueryAsync<GetAllPatientResponseDto>(storedProcedure, param: objectParam, commandType: CommandType.StoredProcedure);
             return patients;
         }
     }
