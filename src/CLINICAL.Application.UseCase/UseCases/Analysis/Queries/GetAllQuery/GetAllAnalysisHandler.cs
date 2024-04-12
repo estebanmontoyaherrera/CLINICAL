@@ -4,10 +4,11 @@ using CLINICAL.Application.Interface.Interfaces;
 using CLINICAL.Application.UseCase.Commons.Bases;
 using CLINICAL.Utilities.Constants;
 using MediatR;
+using static CLINICAL.Utilities.Constants.SP;
 
 namespace CLINICAL.Application.UseCase.UseCases.Analysis.Queries.GetAllQuery;
 
-public class GetAllAnalysisHandler : IRequestHandler<GetAllAnalysisQuery, BaseResponse<IEnumerable<GetAllAnalysisResponseDto>>>
+public class GetAllAnalysisHandler : IRequestHandler<GetAllAnalysisQuery, BasePaginationResponse<IEnumerable<GetAllAnalysisResponseDto>>>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -18,17 +19,21 @@ public class GetAllAnalysisHandler : IRequestHandler<GetAllAnalysisQuery, BaseRe
         _mapper = mapper;
     }
 
-    public async Task<BaseResponse<IEnumerable<GetAllAnalysisResponseDto>>> Handle(GetAllAnalysisQuery request, CancellationToken cancellationToken)
+    public async Task<BasePaginationResponse<IEnumerable<GetAllAnalysisResponseDto>>> Handle(GetAllAnalysisQuery request, CancellationToken cancellationToken)
     {
-        var response = new BaseResponse<IEnumerable<GetAllAnalysisResponseDto>>();
+        var response = new BasePaginationResponse<IEnumerable<GetAllAnalysisResponseDto>>();
         try
         {
-            var analysis = await _unitOfWork.Analysis.GetAllASync(SP.uspAnalysisList);
+            var count = await _unitOfWork.Analysis.CountAsync(TB.Analysis);
+            var analysis = await _unitOfWork.Analysis.GetAllWithPaginationAsync(SP.uspAnalysisList,request);
             if (analysis is not null)
             {
                 response.IsSuccess = true;
+                response.PageNumber=request.PageNumber;
+                response.TotalPages = (int)Math.Ceiling(count / (double)request.PageSize);
+                response.TotalCount=count;
                 response.Data = _mapper.Map<IEnumerable<GetAllAnalysisResponseDto>>(analysis);
-                response.Message = "Consulta Exitosa!!!";
+                response.Message =GlobalMessage.MESSAGE_QUERY;
             }
         }
         catch (Exception e)

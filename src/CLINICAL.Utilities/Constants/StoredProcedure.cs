@@ -45,4 +45,13 @@ public class SP
     public const string uspMedicChangeState = "uspMedicChangeState";
 
     #endregion
+
+    public class TB {
+
+        public const string Analysis = "Analysis";
+        public const string Exams = "Exams";
+        public const string Medics = "Medics";
+        public const string Patients = "Patients";
+
+    }
 }

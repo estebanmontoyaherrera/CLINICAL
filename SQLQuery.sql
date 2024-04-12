@@ -94,7 +94,11 @@ Foreign Key(SpecialtyId) References Specialties(SpecialtyId)
 GO
 
 -------Procedures--------
-CREATE PROCEDURE uspAnalysisList
+CREATE OR ALTER PROCEDURE uspAnalysisList
+(
+@PageNumber INT,
+@PageSize INT
+)
 AS
 BEGIN
     SELECT
@@ -103,10 +107,12 @@ BEGIN
         AuditCreateDate,
         State
     FROM Analysis
-END
+	ORDER BY AnalysisId
+	OFFSET(@PageNumber - 1) * @PageSize ROWS
+	FETCH NEXT @PageSize ROWS ONLY
+END 
 GO
-exec uspAnalysisList
-GO
+
 
 CREATE OR ALTER PROCEDURE uspAnalysisById
 (
@@ -216,6 +222,10 @@ GO
 --------------Exams-------------
 
 CREATE OR ALTER PROCEDURE uspExamList
+(
+@PageNumber INT,
+@PageSize INT
+)
 AS
 BEGIN
 	 SELECT
@@ -229,6 +239,11 @@ BEGIN
 	 FROM Exams ex
 		 INNER JOIN Analysis a
 		 ON ex.AnalysisId=a.AnalysisId 
+
+    ORDER BY ex.ExamId
+	OFFSET(@PageNumber - 1) * @PageSize ROWS
+	FETCH NEXT @PageSize ROWS ONLY
+
 END
 GO
 
@@ -543,5 +558,7 @@ BEGIN
     WHERE MedicId = @MedicId;
 END
 GO
+
+
 
 SELECT * FROM Medics

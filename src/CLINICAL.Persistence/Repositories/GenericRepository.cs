@@ -43,4 +43,22 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
         return recordAffected > 0;
     }
+
+    public async Task<IEnumerable<T>> GetAllWithPaginationAsync(string storedProcedure, object parameter)
+    {
+        using var connection = _context.CreateConnection;
+        var objParam= new DynamicParameters(parameter);
+        return await connection
+            .QueryAsync<T>(storedProcedure, param: objParam, commandType: CommandType.StoredProcedure);
+    }
+
+    public async Task<int> CountAsync(string tableName)
+    {
+        using var connection= _context.CreateConnection;
+        var query = $"SELECT COUNT(1) FROM {tableName}";
+        var count = await connection.ExecuteScalarAsync<int>(query, commandType: CommandType.Text);
+        return count;
+    }
+
+ 
 }
