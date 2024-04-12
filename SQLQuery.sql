@@ -94,7 +94,7 @@ Foreign Key(SpecialtyId) References Specialties(SpecialtyId)
 GO
 
 -------Procedures--------
-CREATE OR ALTER PROCEDURE uspAnalysisList
+CREATE OR ALTER PROCEDURE uspAnalysisList 
 (
 @PageNumber INT,
 @PageSize INT
@@ -221,7 +221,7 @@ SELECT * FROM Analysis
 GO
 --------------Exams-------------
 
-CREATE OR ALTER PROCEDURE uspExamList
+CREATE OR ALTER PROCEDURE uspExamList 
 (
 @PageNumber INT,
 @PageSize INT
@@ -318,6 +318,10 @@ GO
 ----------Patients-----------
 
 CREATE OR ALTER PROCEDURE upsPatientList
+(
+@PageNumber INT,
+@PageSize INT
+)
 AS
 BEGIN
 SELECT 
@@ -341,6 +345,11 @@ INNER JOIN
     TypesAges T ON P.TypeAgeId = T.TypeAgeId
 INNER JOIN 
     Genders G ON P.GenderId = G.GenderId
+
+	ORDER BY P.PatientId
+	OFFSET(@PageNumber - 1) * @PageSize ROWS
+	FETCH NEXT @PageSize ROWS ONLY
+
 END
 GO
 
