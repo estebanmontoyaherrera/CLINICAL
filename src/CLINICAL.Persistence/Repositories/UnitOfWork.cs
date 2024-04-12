@@ -15,6 +15,8 @@ public class UnitOfWork : IUnitOfWork
 
     public IMedicRepository Medic { get; }
 
+    public ITakeExamRepository TakeExam { get; }
+
     public UnitOfWork(ApplicationDbContext context, IGenericRepository<Analysis> analysis)
     {
         _context = context;
@@ -22,6 +24,7 @@ public class UnitOfWork : IUnitOfWork
         Exam = new ExamRepository(_context);
         Patient = new PatientRepository(_context);
         Medic = new MedicRepository(_context);
+        TakeExam = new TakeExamRepository(_context);
     }
 
     public void Dispose()

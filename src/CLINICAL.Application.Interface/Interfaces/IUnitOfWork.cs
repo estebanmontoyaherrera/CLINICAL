@@ -11,4 +11,6 @@ public interface IUnitOfWork : IDisposable
 
     IMedicRepository Medic { get; }
 
+    ITakeExamRepository TakeExam { get; }
+
 }

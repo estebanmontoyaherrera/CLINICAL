@@ -93,6 +93,27 @@ Foreign Key(SpecialtyId) References Specialties(SpecialtyId)
 )
 GO
 
+CREATE TABLE TakeExam
+(
+TakeExamId INT NOT NULL IDENTITY(1,1)PRIMARY KEY,
+PatientId INT,
+MedicId INT,
+State INT,
+AuditCreateDate datetime2(7),
+FOREIGN KEY (PatientId) REFERENCES Patients(PatientId),
+FOREIGN KEY (MedicId) REFERENCES Medics(MedicId)
+)
+GO
+
+CREATE TABLE TakeExamDetail
+(
+TakeExamDetailId INT NOT NULL IDENTITY(1,1)PRIMARY KEY,
+TakeExamId INT,
+ExamId INT,
+AnalysisId INT
+)
+GO
+
 -------Procedures--------
 CREATE OR ALTER PROCEDURE uspAnalysisList 
 (
@@ -568,6 +589,32 @@ BEGIN
 END
 GO
 
+------TakeExam--------------
+CREATE OR ALTER PROCEDURE uspTakeExamList 
+(
+@PageNumber INT,
+@PageSize INT
+)
+AS
+BEGIN
+    SELECT
+	T.TakeExamId,	
+	CONCAT_WS(' ',P.Names,P.LastName,P.MotherMaidenName)Patient,
+	CONCAT_WS(' ',M.Names,M.LastName,M.MotherMaidenName)Medic,
+	CASE T.State WHEN 1 THEN 'FINALIZADO'
+		 ELSE 'PENDIENTE'
+		 END StateTakeExam,
+    T.AuditCreateDate
+	FROM TakeExam T
+	INNER JOIN Patients P ON T.PatientId = P.PatientId
+	INNER JOIN Medics M ON T.MedicId = M.MedicId
+    
+	ORDER BY TakeExamId
+	OFFSET(@PageNumber - 1) * @PageSize ROWS
+	FETCH NEXT @PageSize ROWS ONLY
+END 
+GO
 
 
 SELECT * FROM Medics
+select * from Patients
