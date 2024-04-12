@@ -23,5 +23,29 @@ namespace CLINICAL.Persistence.Repositories
             var takeExams = await connection.QueryAsync<GetAllTakeExamResponseDto>(storedProcedure, param: objectParam, commandType: CommandType.StoredProcedure);
             return takeExams;
         }
+
+        public async Task<TakeExam> GetTakeExamById(int takeExamId)
+        {
+            var connection=_context.CreateConnection;
+            var sql = @"SELECT TakeExamId,PatientId,MedicId FROM TakeExam WHERE TakeExamId=@TakeExamId";
+            var parameter = new DynamicParameters();
+            parameter.Add("TakeExamId", takeExamId);
+
+            var takeExam=await connection.QuerySingleOrDefaultAsync<TakeExam>(sql,param: parameter);
+
+            return takeExam;
+        }
+
+        public async Task<TakeExamDetail> GetTakeExamDetailById(int takeExamId)
+        {
+            var connection = _context.CreateConnection;
+            var sql = @"SELECT TakeExamDetailId,TakeExamId,ExamId,AnalysisId  FROM TakeExamDetail WHERE TakeExamId=@TakeExamId";
+            var parameter = new DynamicParameters();
+            parameter.Add("TakeExamId", takeExamId);
+
+            var takeExamDetail = await connection.QuerySingleOrDefaultAsync<TakeExamDetail>(sql, param: parameter);
+
+            return takeExamDetail;
+        }
     }
 }

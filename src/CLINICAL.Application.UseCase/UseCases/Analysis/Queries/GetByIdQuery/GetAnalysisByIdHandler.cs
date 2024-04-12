@@ -7,12 +7,12 @@ using MediatR;
 
 namespace CLINICAL.Application.UseCase.UseCases.Analysis.Queries.GetByIdQuery;
 
-public class AnalysisByIdHandler : IRequestHandler<GetAnalysisByIdQuery, BaseResponse<GetAnalysisByIdResponseDto>>
+public class GetAnalysisByIdHandler : IRequestHandler<GetAnalysisByIdQuery, BaseResponse<GetAnalysisByIdResponseDto>>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
-    public AnalysisByIdHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public GetAnalysisByIdHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;

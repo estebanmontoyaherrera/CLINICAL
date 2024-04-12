@@ -22,7 +22,6 @@
 
     <ItemGroup>
       <Folder Include="UseCases\TakeExam\Commands\" />
-      <Folder Include="UseCases\TakeExam\Queries\GetByIdQuery\" />
     </ItemGroup>
 
 </Project>

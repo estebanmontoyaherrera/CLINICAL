@@ -8,11 +8,11 @@ using MediatR;
 
 namespace CLINICAL.Application.UseCase.UseCases.Patient.Queries.GetByIdQuery
 {
-    public class PatientByIdHandler : IRequestHandler<GetPatientByIdQuery, BaseResponse<GetPatientByIdResponseDto>>
+    public class GetPatientByIdHandler : IRequestHandler<GetPatientByIdQuery, BaseResponse<GetPatientByIdResponseDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public PatientByIdHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public GetPatientByIdHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;

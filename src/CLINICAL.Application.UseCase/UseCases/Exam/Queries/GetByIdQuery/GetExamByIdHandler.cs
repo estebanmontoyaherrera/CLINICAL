@@ -16,12 +16,12 @@ namespace CLINICAL.Application.UseCase.UseCases.Exam.Queries.GetByIdQuery
 {
 
   
-    public class ExamByIdHandler : IRequestHandler<GetExamByIdQuery, BaseResponse<GetExamByIdResponseDto>>
+    public class GetExamByIdHandler : IRequestHandler<GetExamByIdQuery, BaseResponse<GetExamByIdResponseDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public ExamByIdHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public GetExamByIdHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
