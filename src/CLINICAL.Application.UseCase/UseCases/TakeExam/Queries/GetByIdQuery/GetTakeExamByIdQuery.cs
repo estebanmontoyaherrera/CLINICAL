@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CLINICAL.Application.Dtos.TakeExam.Response;
+using CLINICAL.Application.UseCase.Commons.Bases;
+using MediatR;
 
 namespace CLINICAL.Application.UseCase.UseCases.TakeExam.Queries.GetByIdQuery
 {
-    public class GetTakeExamByIdQuery
+    public class GetTakeExamByIdQuery : IRequest<BaseResponse<GetTakeExamByIdResponseDto>>
     {
+        public int TakeExamId { get; set; }
     }
 }

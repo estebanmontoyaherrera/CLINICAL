@@ -36,14 +36,14 @@ namespace CLINICAL.Persistence.Repositories
             return takeExam;
         }
 
-        public async Task<TakeExamDetail> GetTakeExamDetailById(int takeExamId)
+        public async Task<IEnumerable< TakeExamDetail>> GetTakeExamDetailByTakeExamId(int takeExamId)
         {
             var connection = _context.CreateConnection;
             var sql = @"SELECT TakeExamDetailId,TakeExamId,ExamId,AnalysisId  FROM TakeExamDetail WHERE TakeExamId=@TakeExamId";
             var parameter = new DynamicParameters();
             parameter.Add("TakeExamId", takeExamId);
 
-            var takeExamDetail = await connection.QuerySingleOrDefaultAsync<TakeExamDetail>(sql, param: parameter);
+            var takeExamDetail = await connection.QueryAsync<TakeExamDetail>(sql, param: parameter);
 
             return takeExamDetail;
         }
