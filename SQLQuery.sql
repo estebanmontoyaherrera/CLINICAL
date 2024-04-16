@@ -616,5 +616,6 @@ END
 GO
 
 
-SELECT * FROM Medics
-select * from Patients
+SELECT * FROM exams
+select * from analysis
+SELECT TakeExamDetailId,TakeExamId,ExamId,AnalysisId  FROM TakeExamDetail 

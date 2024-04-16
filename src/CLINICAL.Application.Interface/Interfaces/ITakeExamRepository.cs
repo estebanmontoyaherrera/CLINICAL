@@ -13,6 +13,6 @@ namespace CLINICAL.Application.Interface.Interfaces
     {
         Task<IEnumerable<GetAllTakeExamResponseDto>> GetAllTakeExams(string storedProcedure, object parameter);
         Task<TakeExam>GetTakeExamById(int takeExamId);
-        Task<IEnumerable< TakeExamDetail>> GetTakeExamDetailByTakeExamId(int takeExamDetailId);
+        Task<IEnumerable< TakeExamDetail>> GetTakeExamDetailByTakeExamId(int takeExamId);
     }
 }

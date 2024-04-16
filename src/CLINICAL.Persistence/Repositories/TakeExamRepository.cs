@@ -28,10 +28,10 @@ namespace CLINICAL.Persistence.Repositories
         {
             var connection=_context.CreateConnection;
             var sql = @"SELECT TakeExamId,PatientId,MedicId FROM TakeExam WHERE TakeExamId=@TakeExamId";
-            var parameter = new DynamicParameters();
-            parameter.Add("TakeExamId", takeExamId);
+            var parameters = new DynamicParameters();
+            parameters.Add("TakeExamId", takeExamId);
 
-            var takeExam=await connection.QuerySingleOrDefaultAsync<TakeExam>(sql,param: parameter);
+            var takeExam=await connection.QuerySingleOrDefaultAsync<TakeExam>(sql,param: parameters);
 
             return takeExam;
         }
@@ -40,10 +40,11 @@ namespace CLINICAL.Persistence.Repositories
         {
             var connection = _context.CreateConnection;
             var sql = @"SELECT TakeExamDetailId,TakeExamId,ExamId,AnalysisId  FROM TakeExamDetail WHERE TakeExamId=@TakeExamId";
-            var parameter = new DynamicParameters();
-            parameter.Add("TakeExamId", takeExamId);
 
-            var takeExamDetail = await connection.QueryAsync<TakeExamDetail>(sql, param: parameter);
+            var parameters = new DynamicParameters();
+            parameters.Add("TakeExamId", takeExamId);
+
+            var takeExamDetail = await connection.QueryAsync<TakeExamDetail>(sql, param: parameters);
 
             return takeExamDetail;
         }

@@ -12,6 +12,6 @@
 
         public DateTime? AuditCreateDate { get; set; }
 
-        public IEnumerable<TakeExamDetail> TakeExamDetail { get; set; } = null!;
+        public IEnumerable<TakeExamDetail> TakeExamDetails { get; set; } = null!;
     }
 }

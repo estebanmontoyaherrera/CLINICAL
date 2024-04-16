@@ -23,18 +23,13 @@ namespace CLINICAL.Application.UseCase.UseCases.TakeExam.Queries.GetByIdQuery
 
             try
             {
-                var takeExam = await _unitOfWork.TakeExam.GetTakeExamById(request.TakeExamId);
-                takeExam.TakeExamDetail = await _unitOfWork.TakeExam.GetTakeExamDetailByTakeExamId(request.TakeExamId);
+                var takeExams = await _unitOfWork.TakeExam.GetTakeExamById(request.TakeExamId);
+                takeExams.TakeExamDetails = await _unitOfWork.TakeExam.GetTakeExamDetailByTakeExamId(request.TakeExamId);
 
-                //if (takeExam is null)
-                //{
-                //    response.IsSuccess = false;
-                //    response.Message = GlobalMessage.MESSAGE_QUERY_EMPTY;
-                //    return response;
-                //}
+
 
                 response.IsSuccess = true;
-                response.Data = _mapper.Map<GetTakeExamByIdResponseDto>(takeExam);
+                response.Data = _mapper.Map<GetTakeExamByIdResponseDto>(takeExams);
                 response.Message = GlobalMessage.MESSAGE_QUERY;
             }
             catch (Exception ex)
