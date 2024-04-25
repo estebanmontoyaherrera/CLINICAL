@@ -16,6 +16,8 @@ namespace CLINICAL.Persistence.Repositories
             _context = context;
         }
 
+      
+
         public async Task<IEnumerable<GetAllTakeExamResponseDto>> GetAllTakeExams(string storedProcedure, object parameter)
         {
             using var connection = _context.CreateConnection;
@@ -77,6 +79,34 @@ namespace CLINICAL.Persistence.Repositories
             parameters.Add("TakeExamId", takeExamDetail.TakeExamId);
             parameters.Add("ExamId", takeExamDetail.ExamId);
             parameters.Add("AnalysisId", takeExamDetail.AnalysisId);
+            await connection.ExecuteAsync(sql, param: parameters);
+        }
+
+        public async Task EditTakeExam(TakeExam takeExam)
+        {
+            var connection = _context.CreateConnection;
+            var sql = @"UPDATE TakeExam 
+                        SET PatientId = @PatientId,
+                            MedicId = @MedicId
+                        WHERE TakeExamId = TakeExamId";
+            var parameters = new DynamicParameters();
+            parameters.Add("PatientId", takeExam.PatientId);
+            parameters.Add("MedicId", takeExam.MedicId);
+            parameters.Add("TakeExamId", takeExam.TakeExamId);
+            await connection.ExecuteAsync(sql, param: parameters);
+        }
+
+        public async Task EditTakeExamDetail(TakeExamDetail takeExamDetail)
+        {
+            var connection = _context.CreateConnection;
+            var sql = @"UPDATE TakeExamDetail
+                        SET ExamId = @ExamId,
+                            AnalysisId = @AnalysisId
+                        WHERE TakeExamDetailId = @TakeExamDetailId";
+            var parameters = new DynamicParameters();            
+            parameters.Add("ExamId", takeExamDetail.ExamId);
+            parameters.Add("AnalysisId", takeExamDetail.AnalysisId);
+            parameters.Add("TakeExamDetailId", takeExamDetail.TakeExamDetailId);
             await connection.ExecuteAsync(sql, param: parameters);
         }
     }
