@@ -558,5 +558,7 @@ GO
 	INNER JOIN Patients P ON T.PatientId = P.PatientId
 	INNER JOIN Medics M ON T.MedicId = M.MedicId
 
+
+	SELECT * FROM TakeExam
 	SELECT * FROM TakeExamDetail
 
