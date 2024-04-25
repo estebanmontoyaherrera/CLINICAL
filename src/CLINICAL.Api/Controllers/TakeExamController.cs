@@ -1,4 +1,5 @@
-﻿using CLINICAL.Application.UseCase.UseCases.TakeExam.Commands.CreateCommand;
+﻿using CLINICAL.Application.UseCase.UseCases.TakeExam.Commands.ChangeStateCommand;
+using CLINICAL.Application.UseCase.UseCases.TakeExam.Commands.CreateCommand;
 using CLINICAL.Application.UseCase.UseCases.TakeExam.Commands.UpdateCommand;
 using CLINICAL.Application.UseCase.UseCases.TakeExam.Queries.GetAllQuery;
 using CLINICAL.Application.UseCase.UseCases.TakeExam.Queries.GetByIdQuery;
@@ -46,6 +47,12 @@ namespace CLINICAL.Api.Controllers
             return Ok(response);
         }
 
+        [HttpPut("ChangeState")]
+        public async Task<IActionResult> ChangeStateTakeExam([FromBody] ChangeStateTakeExamCommand command)
+        {
+            var response = await _mediator.Send(command);
+            return Ok(response);
+        }
 
     }
 }

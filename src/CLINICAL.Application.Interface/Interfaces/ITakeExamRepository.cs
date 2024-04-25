@@ -18,5 +18,6 @@ namespace CLINICAL.Application.Interface.Interfaces
         Task RegisterTakeExamDetail(TakeExamDetail takeExamDetail);
         Task EditTakeExam(TakeExam takeExam);
         Task EditTakeExamDetail(TakeExamDetail takeExamDetail);
+        Task<bool> ChangeStateTakeExam(TakeExam takeExam);
     }
 }
