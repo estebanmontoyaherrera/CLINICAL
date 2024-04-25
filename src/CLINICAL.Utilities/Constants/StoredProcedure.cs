@@ -49,6 +49,10 @@ public class SP
     #region uspTakeExam
     public const string uspTakeExamList = "uspTakeExamList";
     #endregion
+
+    #region uspUsers
+    public const string uspUserRegister = "uspUserRegister";
+    #endregion
     public class TB {
 
         public const string Analysis = "Analysis";

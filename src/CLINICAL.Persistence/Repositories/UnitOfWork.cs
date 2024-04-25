@@ -1,6 +1,7 @@
 using CLINICAL.Application.Interface.Interfaces;
 using CLINICAL.Domain.Entities;
 using CLINICAL.Persistence.Context;
+using System.Transactions;
 
 namespace CLINICAL.Persistence.Repositories;
 
@@ -17,6 +18,10 @@ public class UnitOfWork : IUnitOfWork
 
     public ITakeExamRepository TakeExam { get; }
 
+
+
+    public IUserRepository User { get; }
+
     public UnitOfWork(ApplicationDbContext context, IGenericRepository<Analysis> analysis)
     {
         _context = context;
@@ -25,11 +30,20 @@ public class UnitOfWork : IUnitOfWork
         Patient = new PatientRepository(_context);
         Medic = new MedicRepository(_context);
         TakeExam = new TakeExamRepository(_context);
+
+        User=new UserRepository(_context);
     }
 
     public void Dispose()
     {
         GC.SuppressFinalize(this);
+    }
+
+    public TransactionScope BeginTransaction()
+    {
+        var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
+        return transaction;
+
     }
 
 }

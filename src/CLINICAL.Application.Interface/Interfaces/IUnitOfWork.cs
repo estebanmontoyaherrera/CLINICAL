@@ -1,4 +1,5 @@
 using CLINICAL.Domain.Entities;
+using System.Transactions;
 
 namespace CLINICAL.Application.Interface.Interfaces;
 
@@ -12,5 +13,9 @@ public interface IUnitOfWork : IDisposable
     IMedicRepository Medic { get; }
 
     ITakeExamRepository TakeExam { get; }
+    TransactionScope BeginTransaction();
+
+    IUserRepository User { get; }
+   
 
 }
