@@ -89,7 +89,7 @@ GO
 
 
 
-CREATE OR ALTER PROCEDURE [dbo].[uspAnalysisRegister]
+CREATE OR ALTER PROCEDURE uspAnalysisRegister
 (
     @Name varchar(100)
 )
@@ -502,6 +502,8 @@ END
 GO
 
 
+------------DocumentType----------------
+
 CREATE OR ALTER PROCEDURE uspDocumentTypeList 
 (
 @PageNumber INT,
@@ -521,6 +523,44 @@ BEGIN
 	FETCH NEXT @PageSize ROWS ONLY
 END 
 GO
+
+CREATE OR ALTER PROCEDURE uspDocumentTypeRegister
+(
+    @Document VARCHAR(50)
+   
+)
+AS
+BEGIN
+    -- Verificar si el Email ya existe en la tabla Customer
+    IF EXISTS (SELECT 1 FROM DocumentTypes WHERE Document = @Document)
+    BEGIN
+        
+        RAISERROR('El Documento ya existe en la base de datos', 16, 1)
+        RETURN -1 -- Código de error personalizado, puedes elegir el que mejor se ajuste a tu aplicación
+    END
+    ELSE
+    BEGIN
+        -- Si el Email no existe, proceder con la inserción
+        INSERT INTO DocumentTypes (Document,State)
+	    VALUES ( @Document, 1)
+        RETURN @@IDENTITY -- Retornar el ID del registro insertado, si es necesario
+    END
+END
+GO
+
+CREATE OR ALTER PROCEDURE uspDocumentTypeEdit
+(
+    @DocumentTypeId INT,
+    @Document VARCHAR(50)
+)
+AS
+BEGIN 
+    UPDATE DocumentTypes
+        SET Document = @Document
+    WHERE DocumentTypeId = @DocumentTypeId
+END
+GO
+
 
 
 

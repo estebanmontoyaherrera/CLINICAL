@@ -1,4 +1,6 @@
-﻿using CLINICAL.Application.UseCase.UseCases.DocumentType.Queries.GetAllQuery;
+﻿using CLINICAL.Application.UseCase.UseCases.DocumentType.Commands.CreateCommand;
+using CLINICAL.Application.UseCase.UseCases.DocumentType.Queries.GetAllQuery;
+using CLINICAL.Application.UseCase.UseCases.Exam.Commands.CreateCommand;
 using CLINICAL.Application.UseCase.UseCases.Exam.Queries.GetAllQuery;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -21,6 +23,13 @@ namespace CLINICAL.Api.Controllers
         public async Task<IActionResult> ListDocumentTypes([FromQuery] GetAllDocumentTypeQuery query)
         {
             var response = await _mediator.Send(query);
+            return Ok(response);
+        }
+
+        [HttpPost("Register")]
+        public async Task<IActionResult> RegisterDocumentType([FromBody] CreateDocumentTypeCommand command)
+        {
+            var response = await _mediator.Send(command);
             return Ok(response);
         }
     }

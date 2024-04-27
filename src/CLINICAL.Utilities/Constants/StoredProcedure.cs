@@ -52,6 +52,7 @@ public class SP
 
     #region uspDocumentType
     public const string uspDocumentTypeList = "uspDocumentTypeList";
+    public const string uspDocumentTypeRegister = "uspDocumentTypeRegister";
     #endregion
 
 
