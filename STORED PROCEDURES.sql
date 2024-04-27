@@ -501,6 +501,29 @@ BEGIN
 END 
 GO
 
+
+CREATE OR ALTER PROCEDURE uspDocumentTypeList 
+(
+@PageNumber INT,
+@PageSize INT
+)
+AS
+BEGIN
+     SELECT
+	 DocumentTypeId,
+	 Document,
+	 CASE State WHEN 1 THEN 'ACTIVO'
+		 ELSE 'INACTIVO'
+		 END State		 
+	 FROM DocumentTypes	 
+	ORDER BY DocumentTypeId
+	OFFSET(@PageNumber - 1) * @PageSize ROWS
+	FETCH NEXT @PageSize ROWS ONLY
+END 
+GO
+
+
+
 --CREATE OR ALTER PROCEDURE uspUserRegister
 --    @FirstName VARCHAR(50),
 --    @LastName VARCHAR(50),
@@ -546,27 +569,6 @@ END
 GO
 
 
-CREATE OR ALTER PROCEDURE uspDocumentTypeList 
-(
-@PageNumber INT,
-@PageSize INT
-)
-AS
-BEGIN
-	 SELECT
-	 DocumentTypeId,
-	 Document,
-	 CASE State WHEN 1 THEN 'ACTIVO'
-		 ELSE 'INACTIVO'
-		 END State		 
-	 FROM DocumentTypes	 
-
-    ORDER BY DocumentTypeId
-	OFFSET(@PageNumber - 1) * @PageSize ROWS
-	FETCH NEXT @PageSize ROWS ONLY
-
-END
-GO
 
 
 
@@ -575,21 +577,5 @@ GO
 
 
 
- SELECT
-	T.TakeExamId,	
-	CONCAT_WS(' ',P.Names,P.LastName,P.MotherMaidenName)Patient,
-	CONCAT_WS(' ',M.Names,M.LastName,M.MotherMaidenName)Medic,
-	CASE T.State WHEN 1 THEN 'FINALIZADO'
-		 ELSE 'PENDIENTE'
-		 END StateTakeExam,
-    T.AuditCreateDate
-	FROM TakeExam T
-	INNER JOIN Patients P ON T.PatientId = P.PatientId
-	INNER JOIN Medics M ON T.MedicId = M.MedicId
 
-
-
-
-	SELECT * FROM TakeExam
-	SELECT * FROM TakeExamDetail
 
