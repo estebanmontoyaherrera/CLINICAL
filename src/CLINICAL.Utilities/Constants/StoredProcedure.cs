@@ -50,6 +50,11 @@ public class SP
     public const string uspTakeExamList = "uspTakeExamList";
     #endregion
 
+    #region uspDocumentType
+    public const string uspDocumentTypeList = "uspDocumentTypeList";
+    #endregion
+
+
     #region uspUsers
     public const string uspUserRegister = "uspUserRegister";
     #endregion
@@ -60,6 +65,7 @@ public class SP
         public const string Medics = "Medics";
         public const string Patients = "Patients";
         public const string TakeExam = "TakeExam";
+        public const string DocumentTypes = "DocumentTypes";
 
     }
 }

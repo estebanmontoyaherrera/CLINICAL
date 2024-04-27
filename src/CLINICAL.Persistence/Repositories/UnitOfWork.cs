@@ -18,9 +18,9 @@ public class UnitOfWork : IUnitOfWork
 
     public ITakeExamRepository TakeExam { get; }
 
-
-
     public IUserRepository User { get; }
+
+    public IDocumentTypeRepository DocumentType { get; }
 
     public UnitOfWork(ApplicationDbContext context, IGenericRepository<Analysis> analysis)
     {
@@ -30,8 +30,9 @@ public class UnitOfWork : IUnitOfWork
         Patient = new PatientRepository(_context);
         Medic = new MedicRepository(_context);
         TakeExam = new TakeExamRepository(_context);
+        DocumentType = new DocumentTypeRepository(_context);
 
-        User=new UserRepository(_context);
+        User =new UserRepository(_context);
     }
 
     public void Dispose()

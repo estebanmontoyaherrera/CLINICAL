@@ -13,6 +13,9 @@ public interface IUnitOfWork : IDisposable
     IMedicRepository Medic { get; }
 
     ITakeExamRepository TakeExam { get; }
+
+    IDocumentTypeRepository DocumentType { get; }
+
     TransactionScope BeginTransaction();
 
     IUserRepository User { get; }

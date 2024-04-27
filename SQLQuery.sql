@@ -1,5 +1,5 @@
---CREATE DATABASE CLINICAL
---GO
+CREATE DATABASE CLINICAL
+GO
 
 USE CLINICAL
 GO
@@ -110,13 +110,30 @@ CREATE TABLE TakeExamDetail
 TakeExamDetailId INT NOT NULL IDENTITY(1,1)PRIMARY KEY,
 TakeExamId INT,
 ExamId INT,
-AnalysisId INT
+AnalysisId INT,
 )
 GO
 
+CREATE TABLE Results
+(
+ResultId INT NOT NULL IDENTITY(1,1)PRIMARY KEY,
+TakeExamId INT,
+State INT,
+AuditCreateDate datetime2(7),
+FOREIGN KEY (TakeExamId) REFERENCES TakeExam(TakeExamId)
+)
+GO
 
-
-
+CREATE TABLE ResultDetail
+(
+ResultDetailId INT NOT NULL IDENTITY(1,1)PRIMARY KEY,
+ResultId INT,
+ResultFile VARCHAR(MAX),
+TakeExamDetailId INT,
+FOREIGN KEY (ResultId) REFERENCES Results(ResultId),
+FOREIGN KEY (TakeExamDetailId) REFERENCES TakeExamDetail(TakeExamDetailId)
+)
+GO
 ---------------
 CREATE TABLE Roles
 (
@@ -157,7 +174,14 @@ FOREIGN KEY (RoleId) REFERENCES Roles(RoleId)
 )
 GO
 
-SELECT * FROM exams
+
+
+
+
+
+SELECT * FROM users
+
+SELECT * FROM roles
 select * from analysis
 select * from TakeExam
 SELECT TakeExamDetailId,TakeExamId,ExamId,AnalysisId  FROM TakeExamDetail 

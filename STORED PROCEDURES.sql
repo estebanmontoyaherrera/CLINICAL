@@ -501,19 +501,19 @@ BEGIN
 END 
 GO
 
-CREATE OR ALTER PROCEDURE uspUserRegister
-    @FirstName VARCHAR(50),
-    @LastName VARCHAR(50),
-    @Email VARCHAR(255),
-    @Password VARCHAR(MAX),
-    @RoleId INT
+--CREATE OR ALTER PROCEDURE uspUserRegister
+--    @FirstName VARCHAR(50),
+--    @LastName VARCHAR(50),
+--    @Email VARCHAR(255),
+--    @Password VARCHAR(MAX),
+--    @RoleId INT
    
-AS
-BEGIN
-    INSERT INTO Users (FirtName, LastName, Email, Password, RoleId, Satate, AuditCreateDate)
-    VALUES (@FirstName, @LastName, @Email, @Password, @RoleId, 1, GETDATE())
-END
-GO
+--AS
+--BEGIN
+--    INSERT INTO Users (FirtName, LastName, Email, Password, RoleId, Satate, AuditCreateDate)
+--    VALUES (@FirstName, @LastName, @Email, @Password, @RoleId, 1, GETDATE())
+--END
+--GO
 
 
 
@@ -546,6 +546,35 @@ END
 GO
 
 
+CREATE OR ALTER PROCEDURE uspDocumentTypeList 
+(
+@PageNumber INT,
+@PageSize INT
+)
+AS
+BEGIN
+	 SELECT
+	 DocumentTypeId,
+	 Document,
+	 CASE State WHEN 1 THEN 'ACTIVO'
+		 ELSE 'INACTIVO'
+		 END State		 
+	 FROM DocumentTypes	 
+
+    ORDER BY DocumentTypeId
+	OFFSET(@PageNumber - 1) * @PageSize ROWS
+	FETCH NEXT @PageSize ROWS ONLY
+
+END
+GO
+
+
+
+
+
+
+
+
  SELECT
 	T.TakeExamId,	
 	CONCAT_WS(' ',P.Names,P.LastName,P.MotherMaidenName)Patient,
@@ -557,6 +586,8 @@ GO
 	FROM TakeExam T
 	INNER JOIN Patients P ON T.PatientId = P.PatientId
 	INNER JOIN Medics M ON T.MedicId = M.MedicId
+
+
 
 
 	SELECT * FROM TakeExam
