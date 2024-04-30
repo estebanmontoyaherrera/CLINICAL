@@ -168,7 +168,7 @@ LastName VARCHAR(50),
 Email VARCHAR(255),
 Password VARCHAR(MAX),
 RoleId INT,
-Satate INT,
+State INT,
 AuditCreateDate DATETIME2(7),
 FOREIGN KEY (RoleId) REFERENCES Roles(RoleId)
 )

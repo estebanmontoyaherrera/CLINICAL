@@ -83,7 +83,6 @@ BEGIN
     DELETE FROM Analysis
     WHERE AnalysisId = @AnalysisId
 END
-
 GO
     
 
@@ -561,8 +560,16 @@ BEGIN
 END
 GO
 
-
-
+CREATE OR ALTER PROCEDURE uspDocumentTypeRemove
+(
+    @DocumentTypeId INT
+)
+AS
+BEGIN 
+    DELETE FROM DocumentTypes
+    WHERE DocumentTypeId = @DocumentTypeId
+END
+GO
 
 --CREATE OR ALTER PROCEDURE uspUserRegister
 --    @FirstName VARCHAR(50),
@@ -601,7 +608,7 @@ BEGIN
     ELSE
     BEGIN
         -- Si el Email no existe, proceder con la inserción
-        INSERT INTO Users (FirtName, LastName, Email, Password, RoleId, Satate, AuditCreateDate)
+        INSERT INTO Users (FirtName, LastName, Email, Password, RoleId, State, AuditCreateDate)
 	    VALUES (@FirstName, @LastName, @Email, @Password, @RoleId, 1, GETDATE())
         RETURN @@IDENTITY -- Retornar el ID del registro insertado, si es necesario
     END

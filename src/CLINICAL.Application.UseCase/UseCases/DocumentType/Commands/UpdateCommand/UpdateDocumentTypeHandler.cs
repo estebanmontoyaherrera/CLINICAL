@@ -5,27 +5,26 @@ using CLINICAL.Utilities.Constants;
 using CLINICAL.Utilities.HelperExtensions;
 using MediatR;
 using Entity = CLINICAL.Domain.Entities;
-namespace CLINICAL.Application.UseCase.UseCases.Exam.Commands.UpdateCommand
+namespace CLINICAL.Application.UseCase.UseCases.DocumentType.Commands.UpdateCommand
 {
-    public class UpdateExamHandler : IRequestHandler<UpdateExamCommand, BaseResponse<bool>>
+    public class UpdateDocumentTypeHandler : IRequestHandler<UpdateDocumentTypeCommand, BaseResponse<bool>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-
-        public UpdateExamHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public UpdateDocumentTypeHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<BaseResponse<bool>> Handle(UpdateExamCommand request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<bool>> Handle(UpdateDocumentTypeCommand request, CancellationToken cancellationToken)
         {
             var response = new BaseResponse<bool>();
 
             try
             {
-                var exams = _mapper.Map<Entity.Exam>(request);
-                var parameters = exams.GetPropertiesWithValues();
-                response.Data = await _unitOfWork.Exam.ExecAsync(SP.uspExamEdit, parameters);
+                var documentType = _mapper.Map<Entity.DocumentType>(request);
+                var parameters = documentType.GetPropertiesWithValues();
+                response.Data = await _unitOfWork.Exam.ExecAsync(SP.uspDocumentTypeEdit, parameters);
                 if (response.Data)
                 {
                     response.IsSuccess = true;
