@@ -59,6 +59,9 @@ public class SP
 
     #endregion
 
+    #region uspResult
+    public const string uspResultList = "uspResultList";
+    #endregion
 
     #region uspUsers
     public const string uspUserRegister = "uspUserRegister";
@@ -71,6 +74,7 @@ public class SP
         public const string Patients = "Patients";
         public const string TakeExam = "TakeExam";
         public const string DocumentTypes = "DocumentTypes";
+        public const string Results = "Results";
 
     }
 }

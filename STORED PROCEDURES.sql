@@ -571,20 +571,38 @@ BEGIN
 END
 GO
 
---CREATE OR ALTER PROCEDURE uspUserRegister
---    @FirstName VARCHAR(50),
---    @LastName VARCHAR(50),
---    @Email VARCHAR(255),
---    @Password VARCHAR(MAX),
---    @RoleId INT
-   
---AS
---BEGIN
---    INSERT INTO Users (FirtName, LastName, Email, Password, RoleId, Satate, AuditCreateDate)
---    VALUES (@FirstName, @LastName, @Email, @Password, @RoleId, 1, GETDATE())
---END
---GO
 
+-------------Results-------------
+
+
+CREATE OR ALTER PROCEDURE uspResultList 
+(
+@PageNumber INT,
+@PageSize INT
+)
+AS
+BEGIN
+    SELECT 
+	R.ResultId,
+	CONCAT_WS(' ',P.LastName,P.MotherMaidenName,P.Names)Patient,
+	P.DocumentNumber PatientDocument,
+	R.AuditCreateDate,
+	CASE R.State WHEN 1 THEN 'ENTREGADO' 
+	ELSE 'REALIZADO'
+	END StateResult
+	FROM Results R
+	INNER JOIN TakeExam TE ON R.TakeExamId = TE.TakeExamId
+	INNER JOIN Patients P ON TE.PatientId=P.PatientId
+	ORDER BY ResultId
+	OFFSET(@PageNumber - 1) * @PageSize ROWS
+	FETCH NEXT @PageSize ROWS ONLY
+END 
+GO
+
+
+
+
+-----------------Users------------
 
 
 

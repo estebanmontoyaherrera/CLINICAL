@@ -18,6 +18,8 @@ public class UnitOfWork : IUnitOfWork
 
     public ITakeExamRepository TakeExam { get; }
 
+    public IResultRepository Result { get; }
+
     public IUserRepository User { get; }
 
     public IDocumentTypeRepository DocumentType { get; }
@@ -31,7 +33,7 @@ public class UnitOfWork : IUnitOfWork
         Medic = new MedicRepository(_context);
         TakeExam = new TakeExamRepository(_context);
         DocumentType = new DocumentTypeRepository(_context);
-
+        Result = new ResultRepository(_context);
         User =new UserRepository(_context);
     }
 

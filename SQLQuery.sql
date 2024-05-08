@@ -134,7 +134,10 @@ FOREIGN KEY (ResultId) REFERENCES Results(ResultId),
 FOREIGN KEY (TakeExamDetailId) REFERENCES TakeExamDetail(TakeExamDetailId)
 )
 GO
----------------
+
+
+
+---------------Users---------
 CREATE TABLE Roles
 (
 RoleId INT NOT NULL IDENTITY(1,1)PRIMARY KEY,
@@ -179,9 +182,3 @@ GO
 
 
 
-SELECT * FROM users
-
-SELECT * FROM roles
-select * from analysis
-select * from TakeExam
-SELECT TakeExamDetailId,TakeExamId,ExamId,AnalysisId  FROM TakeExamDetail 

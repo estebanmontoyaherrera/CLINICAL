@@ -16,6 +16,8 @@ public interface IUnitOfWork : IDisposable
 
     IDocumentTypeRepository DocumentType { get; }
 
+    IResultRepository Result { get; }
+
     TransactionScope BeginTransaction();
 
     IUserRepository User { get; }
