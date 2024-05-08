@@ -11,5 +11,8 @@
       <ProjectReference Include="..\CLINICAL.Application.Dtos\CLINICAL.Application.Dtos.csproj" />
       <ProjectReference Include="..\CLINICAL.Domain\CLINICAL.Domain.csproj" />
     </ItemGroup>
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App"/>
+	</ItemGroup>
 
 </Project>
