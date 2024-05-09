@@ -9,6 +9,5 @@ namespace CLINICAL.Application.Interface.Interfaces
 {
     public interface IUserRepository:IGenericRepository<User>
     {
-
     }
 }
