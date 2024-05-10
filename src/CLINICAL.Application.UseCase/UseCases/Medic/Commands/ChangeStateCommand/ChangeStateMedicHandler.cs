@@ -24,7 +24,7 @@ namespace CLINICAL.Application.UseCase.UseCases.Medic.Commands.ChangeStateComman
             {
                 var analysis = _mapper.Map<Entity.Medic>(request);
                 var parameters = analysis.GetPropertiesWithValues();
-                response.Data = await _unitOfWork.Exam.ExecAsync(SP.uspMedicChangeState, parameters);
+                response.Data = await _unitOfWork.Medic.ExecAsync(SP.uspMedicChangeState, parameters);
 
                 if (response.Data)
                 {
