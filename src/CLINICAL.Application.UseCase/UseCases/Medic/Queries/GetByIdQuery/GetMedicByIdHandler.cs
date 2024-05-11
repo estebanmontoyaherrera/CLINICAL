@@ -14,12 +14,12 @@ using System.Threading.Tasks;
 
 namespace CLINICAL.Application.UseCase.UseCases.Medic.Queries.GetByIdQuery
 {
-    public class MedicByIdHandler : IRequestHandler<GetMedicByIdQuery, BaseResponse<GetMedicByIdResponseDto>>
+    public class GetMedicByIdHandler : IRequestHandler<GetMedicByIdQuery, BaseResponse<GetMedicByIdResponseDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public MedicByIdHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public GetMedicByIdHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
