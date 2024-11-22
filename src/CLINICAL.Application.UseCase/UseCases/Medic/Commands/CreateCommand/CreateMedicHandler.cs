@@ -24,7 +24,7 @@ namespace CLINICAL.Application.UseCase.UseCases.Medic.Commands.CreateCommand
             {
                 var medic = _mapper.Map<Entity.Medic>(request);
                 var parameters = medic.GetPropertiesWithValues();
-                response.Data = await _unitOfWork.Exam.ExecAsync(SP.uspMedicRegister, parameters);
+                response.Data = await _unitOfWork.Medic.ExecAsync(SP.uspMedicRegister, parameters);
                 if (response.Data)
                 {
                     response.IsSuccess = true;

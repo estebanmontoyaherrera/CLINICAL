@@ -28,9 +28,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         using var connection = _context.CreateConnection;
         var objParam = new DynamicParameters(parameter);
         
-        return await connection.QuerySingleOrDefaultAsync<T>(storedProcedure, 
-            param: objParam,
-            commandType: CommandType.StoredProcedure);
+        return await connection.QuerySingleOrDefaultAsync<T>(storedProcedure,param:objParam,commandType:CommandType.StoredProcedure);
     }
 
     public async Task<bool> ExecAsync(string storedProcedure, object parameter)
